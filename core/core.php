@@ -29,8 +29,6 @@ class Core{
         $this->limit_check();
         $this->set_basic_config();;
         $this->set_db_config();
-        $this->set_mailer_config();
-        $this->set_other_config();
         $this->route();
     }
 
@@ -56,35 +54,6 @@ class Core{
             define('DB_PREFIX', $this->config['db_info']['prefix']);
             define('DB_PORT', $this->config['db_info']['port']);
             define('DB_CHARSET', $this->config['db_info']['charset']);
-        }
-    }
-
-    /**
-     * Load PHPMailer configurations
-     */
-    private function set_mailer_config(){
-        if($this->config['mailer_info']){
-            define('MAILER_HOST', $this->config['mailer_info']['host']);
-            define('MAILER_USER', $this->config['mailer_info']['username']);
-            define('MAILER_PASS', $this->config['mailer_info']['pwd']);
-            define('MAILER_SECURE', $this->config['mailer_info']['secure']);
-            define('MAILER_PORT', $this->config['mailer_info']['port']);
-            define('MAILER_SENDER', $this->config['mailer_info']['sender']);
-        }
-    }
-
-    /**
-     * Load other configurations
-     */
-    private function set_other_config(){
-        if($this->config['cors_allow']){
-            define('CORS_ALLOW', $this->config['cors_allow']);
-        }
-        if($this->config['vaptcha']){
-            define('VAPTCHA', $this->config['vaptcha']);
-        }
-        if($this->config['admin_email']){
-            define('ADMIN_EMAIL', $this->config['admin_email']);
         }
     }
 

@@ -22,12 +22,6 @@ return array(
         'default_controller' => 'index',
         'default_action' => 'get'
     ),
-    // vaptcha
-    'vaptcha' => array(
-        'id' => '',
-        'secretkey' => '',
-        'scene' => '0'
-    ),
     'request_limit' => array(
         'ttl' => 60,
         'limit' => 100
