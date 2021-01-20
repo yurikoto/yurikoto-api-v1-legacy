@@ -1,7 +1,6 @@
 <?php
 namespace app\controller;
 use \core\base\controller;
-use app\model\sentences_pending;
 use app\model\sentences;
 use core\base\functions;
 

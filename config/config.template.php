@@ -1,4 +1,9 @@
 <?php
+/**
+ * 配置文件
+ * 需要将本文件名修改为 config.php 以生效。
+ * 如果需要自托管，请填写本配置文件，并参考 https://github.com/yurikoto/yurikoto-resources 导入数据库。
+ */
 return array(
     // MySQL configuration
     'db_info' => array(
