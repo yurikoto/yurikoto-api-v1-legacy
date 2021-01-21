@@ -43,7 +43,16 @@ class wallpaper_controller extends controller{
         $this->assign($res, 400);
 
         $wallpapers = new wallpapers();
-        $res = $wallpapers->get_rand();
+
+        if(isset($_GET['type']) && $_GET['type'] == 'day'){
+            $res = $wallpapers->get_rand_by_type('day');
+        }
+        elseif(isset($_GET['type']) && $_GET['type'] == 'night'){
+            $res = $wallpapers->get_rand_by_type('night');
+        }
+        else{
+            $res = $wallpapers->get_rand();
+        }
 
         $this->show($res);
     }
