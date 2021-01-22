@@ -32,3 +32,6 @@ if (!-e $request_filename){
 
 需要您创建数据库后，通过[资源仓库](https://github.com/yurikoto/yurikoto-resources)中提供的SQL文件导入表。
 
+### 源码调整
+
+需要您自行修改`core/core.php`中的部分代码，请参考该文件中的注释。

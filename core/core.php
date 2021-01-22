@@ -1,6 +1,12 @@
 <?php
+/**
+ * 自部署注意：
+ * 请注释本文件第10行、第36行，并取消第37行及第72-95行注释
+ */
+
+
 namespace core;
-use core\base\functions;
+use core\base\origin_check; //自部署时请自行注释本行代码
 
 defined('CORE_PATH') or define('CORE_PATH', __DIR__);
 
@@ -26,7 +32,8 @@ class Core{
      */
     public function run(){
         spl_autoload_register(array($this, 'loadClass'));
-        $this->limit_check();
+        origin_check::execute($this->config['request_limit']); //自部署时请自行注释本行代码
+        // $this->limit_check(); //自部署时请自行取消本行代码注释
         $this->set_basic_config();;
         $this->set_db_config();
         $this->route();
@@ -59,31 +66,32 @@ class Core{
 
     /**
      * Check if current ip exceeded request limit
+     * 自部署时请自行取消本函数注释
      */
-    private function limit_check(){
-        $key= 'request_count_' . functions::get_ip();
-        $redis = functions::get_redis();
-        $exists = $redis->exists($key);
-        $redis->incr($key);
-
-        if($exists){
-            $count = $redis->get($key);
-
-            // 这个incr简直太诡异了，每次都加二，不知道原因，希望这背后没有大问题
-            // 后续：莫名其妙的好了
-            if($count > $this->config['request_limit']['limit']){
-                http_response_code(429);
-                $res['status'] = 'failed';
-                $res['error'] = 'Too many requests';
-                exit(json_encode($res));
-            }
-        }
-        else{
-            // 首次计数 设定过期时间
-            $redis->expire($key, $this->config['request_limit']['ttl']);
-            // exit();
-        }
-    }
+//    private function limit_check(){
+//        $key= 'request_count_' . functions::get_ip();
+//        $redis = functions::get_redis();
+//        $exists = $redis->exists($key);
+//        $redis->incr($key);
+//
+//        if($exists){
+//            $count = $redis->get($key);
+//
+//            // 这个incr简直太诡异了，每次都加二，不知道原因，希望这背后没有大问题
+//            // 后续：莫名其妙的好了
+//            if($count > $this->config['request_limit']['limit']){
+//                http_response_code(429);
+//                $res['status'] = 'failed';
+//                $res['error'] = 'Too many requests';
+//                exit(json_encode($res));
+//            }
+//        }
+//        else{
+//            // 首次计数 设定过期时间
+//            $redis->expire($key, $this->config['request_limit']['ttl']);
+//            // exit();
+//        }
+//    }
 
     /**
      * Get the controller and action and execute

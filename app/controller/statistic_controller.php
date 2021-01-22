@@ -22,6 +22,8 @@ class statistic_controller extends controller{
         $data['wallpaper'] = [];
         $data['wallpaper']['approved'] = $redis->get('wallpaper_approved');
         $data['wallpaper']['requested'] = $redis->get('wallpaper_requested');
+        $data['other'] = [];
+        $data['other']['site_served'] = $redis->sCard('domain_transfered');
 
         $res['data'] = $data;
         $res['status'] = 'success';

@@ -21,7 +21,7 @@ include_once 'cors.php';
 session_start();
 define('APP_PATH', __DIR__ . '/');
 
-error_reporting(0);
+// error_reporting(0);
 
 // define('APP_DEBUG', true);
 
