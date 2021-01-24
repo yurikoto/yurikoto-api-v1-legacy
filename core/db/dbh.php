@@ -22,7 +22,9 @@ class dbh{
 
             return self::$pdo = new PDO($dsn, DB_USER, DB_PASS, $option);
         } catch (PDOException $e){
-            exit($e->getMessage());
+            http_response_code(500);
+            return -1;
+            // exit($e->getMessage());
         }
     }
 }

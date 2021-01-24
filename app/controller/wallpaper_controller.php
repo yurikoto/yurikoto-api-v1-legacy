@@ -85,7 +85,7 @@ class wallpaper_controller extends controller{
         $day_cnt = $redis->get('wallpaper_day_count');
         // $night_cnt = $redis->get('wallpaper_night_count');
 
-        $id = 1;
+        // $id = 1;
 
         if(isset($_GET['type']) && $_GET['type'] == 'day'){
             $id = rand(1, $day_cnt);
@@ -135,7 +135,7 @@ class wallpaper_controller extends controller{
             }
             elseif(isset($_GET['encode']) && $_GET['encode'] == 'json'){
                 $res['status'] = 'success';
-                $res['id'] = $id;
+                $res['id'] = $id - $day_cnt + 5000;
                 $res['link'] = $link;
                 $res['type'] = 'night';
                 $this->assign($res, 200);
