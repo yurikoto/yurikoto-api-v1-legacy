@@ -24,6 +24,7 @@ class statistic_controller extends controller{
         $data['wallpaper']['requested'] = $redis->get('wallpaper_requested');
         $data['other'] = [];
         $data['other']['site_served'] = $redis->sCard('domain_transfered');
+        $data['other']['wp_plugin_latest'] = $redis->get('wp_plugin_latest');
 
         $res['data'] = $data;
         $res['status'] = 'success';

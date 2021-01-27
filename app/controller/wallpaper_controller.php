@@ -35,27 +35,27 @@ class wallpaper_controller extends controller{
     }
 
     /**
-     * 默认
+     * 默认，通过数据库
      */
-//    public function get(){
-//        $res = [];
-//        $res['status'] = 'failed';
-//        $this->assign($res, 400);
-//
-//        $wallpapers = new wallpapers();
-//
-//        if(isset($_GET['type']) && $_GET['type'] == 'day'){
-//            $res = $wallpapers->get_rand_by_type('day');
-//        }
-//        elseif(isset($_GET['type']) && $_GET['type'] == 'night'){
-//            $res = $wallpapers->get_rand_by_type('night');
-//        }
-//        else{
-//            $res = $wallpapers->get_rand();
-//        }
-//
-//        $this->show($res);
-//    }
+    public function get(){
+        $res = [];
+        $res['status'] = 'failed';
+        $this->assign($res, 400);
+
+        $wallpapers = new wallpapers();
+
+        if(isset($_GET['type']) && $_GET['type'] == 'day'){
+            $res = $wallpapers->get_rand_by_type('day');
+        }
+        elseif(isset($_GET['type']) && $_GET['type'] == 'night'){
+            $res = $wallpapers->get_rand_by_type('night');
+        }
+        else{
+            $res = $wallpapers->get_rand();
+        }
+
+        $this->show($res);
+    }
 
     private function show($res){
         functions::get_redis()->incr('wallpaper_requested');
@@ -75,7 +75,10 @@ class wallpaper_controller extends controller{
         }
     }
 
-    public function get(){
+    /**
+     * 默认，通过jsdelivr（违反jsdelivr利用规约）
+     */
+    public function jsd(){
         $res = [];
         $res['status'] = 'failed';
         $this->assign($res, 400);
